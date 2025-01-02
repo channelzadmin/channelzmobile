@@ -1,14 +1,26 @@
+import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-export default function PostListItem({ post }) {
+// Define types
+interface Post {
+  image: string;
+  caption: string; // Optional field, add more properties as needed
+}
+
+interface PostListItemProps {
+  post: Post;
+}
+
+export default function PostListItem({ post }: PostListItemProps) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         {/* You can add user details or other information here */}
+        <Text>{post.caption}</Text>
       </View>
 
-      <Image source={{ uri: post.image_url }} style={styles.image} />
+      <Image source={{ uri: post.image }} style={styles.image} />
 
       <View style={styles.footer}>
         <Feather name="send" size={20} />

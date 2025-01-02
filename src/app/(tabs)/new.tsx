@@ -1,13 +1,10 @@
-import {
-  Text,
-  View,
-  TextInput,
-  Pressable,
-  Image,
-  StyleSheet,
-} from "react-native";
+import { Text, View, TextInput, Image, StyleSheet } from "react-native";
+import Button from "~/src/components/Button";
 import { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
+import { uploadImage } from "~/src/lib/cloudinary";
+import { supabase } from "~/src/lib/supabase";
+import { router } from "expo-router";
 
 export default function CreatePost() {
   const [caption, setCaption] = useState("");
@@ -31,6 +28,26 @@ export default function CreatePost() {
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
+  };
+  const createPost = async () => {
+    if (!image) {
+      return;
+    }
+    const response = await uploadImage(image);
+    // Save the post in database
+    console.log("image id: ", response?.public_id);
+
+    const { data, error } = await supabase
+      .from("posts")
+      .insert([
+        {
+          caption,
+          image: response?.public_id,
+        },
+      ])
+      .select();
+
+    router.push("/(tabs)");
   };
 
   return (
@@ -56,9 +73,7 @@ export default function CreatePost() {
 
       {/* Button */}
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Share</Text>
-        </Pressable>
+        <Button title="Share" onPress={createPost} />
       </View>
     </View>
   );
