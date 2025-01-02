@@ -15,15 +15,14 @@ interface PostListItemProps {
 export default function PostListItem({ post }: PostListItemProps) {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        {/* You can add user details or other information here */}
-        <Text>{post.caption}</Text>
-      </View>
-
       <Image source={{ uri: post.image }} style={styles.image} />
 
       <View style={styles.footer}>
         <Feather name="send" size={20} />
+      </View>
+      <View style={styles.header}>
+        {/* You can add user details or other information here */}
+        <Text>{post.caption}</Text>
       </View>
     </View>
   );

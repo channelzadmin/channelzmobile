@@ -60,7 +60,7 @@ export default function CreatePost() {
       )}
 
       <Text onPress={pickImage} style={styles.changeText}>
-        Change
+        Select Image
       </Text>
 
       {/* TextInput for caption */}

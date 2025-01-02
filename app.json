@@ -20,7 +20,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.sherajummunir.ChannelZ"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -34,6 +38,14 @@
           "photosPermission": "The app accesses your photos to let you share them anonymously."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "21f72685-a9a4-4735-851d-47aa6a0b3c65"
+      }
+    }
   }
 }
